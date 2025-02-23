@@ -118,7 +118,8 @@
   }
 
   .book-overview_btn {
-    @apply mt-4 min-h-14 w-fit bg-primary text-dark-100 hover:bg-primary/90 max-md:w-full !important;
+    @apply mt-4 min-h-14 w-fit bg-primary text-dark-100 
+     hover:bg-primary/90 max-md:w-full !important;
   }
 
   /* File Upload */
@@ -257,7 +258,7 @@
 
   /* Root */
   .root-container {
-    @apply flex min-h-screen flex-1 flex-col bg-pattern bg-cover bg-top /* bg-dark-100 */ px-5 xs:px-10 md:px-16;
+    @apply flex min-h-screen flex-1 flex-col bg-pattern bg-cover bg-top bg-dark-100 px-5 xs:px-10 md:px-16;
   }
 
   /* Book Details */

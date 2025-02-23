@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button } from './ui/button';
+import BookCover from './BookCover';
 
 
 
@@ -8,11 +9,11 @@ const BookOverview = ({ title,
                         author, 
                         genre, 
                         rating, 
-                        totalCopies: total_copies, 
-                        availableCopies: available_copies, 
+                        totalCopies, 
+                        availableCopies, 
                         description,
-                        color,
-                        cover }: Book) => {
+                        coverColor,
+                        coverUrl }: Book) => {  //coverUrl = https://m.media-amazon.com/images/I/81J6APjwxlL.jpg
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
@@ -35,10 +36,10 @@ const BookOverview = ({ title,
 
         <div className="book-copies">
           <p>
-            Total Books: <span>{total_copies}</span>
+            Total Books: <span>{totalCopies}</span>
           </p>
           <p>
-            Available Books: <span>{available_copies}</span>
+            Available Books: <span>{availableCopies}</span>
           </p>
         </div>
 
@@ -53,7 +54,17 @@ const BookOverview = ({ title,
 
       <div className="relative flex flex-1 justify-center">
         <div className="relative">
-          <BookCover />
+          <BookCover variant="wide"
+                     className="z-10"
+                     coverColor={coverColor}
+                     coverUrl={coverUrl} 
+          />
+          <div className="absolute left-16 top-10 rotate-12 opacity-40 max-sm:hidden">
+            <BookCover variant="wide"
+                       coverColor={coverColor}
+                       coverUrl={coverUrl} 
+            />
+          </div>
         </div>
       </div>
     </section>
