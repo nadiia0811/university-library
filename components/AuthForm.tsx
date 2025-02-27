@@ -70,13 +70,13 @@ const AuthForm  = <T extends FieldValues> ({
             <FormField  control={form.control}
                         name={field as Path<T>}   //field is a string
                         key={field}
-                        render={({ field }) => (
+                        render={({ field }) => (  //field is object
                         <FormItem>
                             <FormLabel className="capitalize">
                               {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}
                             </FormLabel>
                             <FormControl>
-                              {field.name === "universityCard" ? <ImageUpload /> : 
+                              {field.name === "universityCard" ? <ImageUpload onFileChange={field.onChange}/> : 
                                 <Input required 
                                        type={
                                           FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]
