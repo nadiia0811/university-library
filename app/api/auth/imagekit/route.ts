@@ -1,6 +1,6 @@
 import ImageKit from "imagekit";
 import config from "@/lib/config";
-import { NextResponse } from "next/server";
+import { NextResponse } from "next/server"; 
 
 
 //Next.js backend 
@@ -13,14 +13,25 @@ const imagekit = new ImageKit({
     privateKey,
 });
 
-export async function GET(){
-    return NextResponse.json(imagekit.getAuthenticationParameters());
+//console.log("imagekit:", imagekit) 
 
-    /*answer is object
-    {
-        "token": "random-token-string",
-        "expire": 1700000000, 
-        "signature": "hashed-signature"
-    }*/
-      
-};
+export async function GET() { 
+   return NextResponse.json(imagekit.getAuthenticationParameters());
+}  
+ 
+/*answer is object
+{
+    "token": "random-token-string",
+    "expire": 1700000000, 
+    "signature": "hashed-signature"
+}*/
+
+
+
+
+
+
+
+
+
+

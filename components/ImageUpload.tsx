@@ -6,6 +6,8 @@ import { ImageKitProvider,
          IKImage} from "imagekitio-next";
 import React, { useRef, useState } from 'react';
 import Image from "next/image";
+import { toast } from "sonner";
+
 
 
 
@@ -21,8 +23,11 @@ const authenticator = async () => {
       }
 
       const data = await response.json();
+      console.log("data: ", data)
+
       const { signature, expire, token } = data;
       return { signature, expire, token };
+      
     } catch (error: any) {
        throw new Error(`Authentication request failed: ${error.message}`)
     }
@@ -34,11 +39,12 @@ type Props = {
   onFileChange: (filePath: string) => void;
 }
 
+
 const ImageUpload = ({ onFileChange }: Props) => {  
   const ikUploadRef = useRef(null);
   const [file, setFile] = useState<{filePath: string} | null>(null);
 
-  const uploadFileHandler = (e) => {
+  const uploadFileHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     if (ikUploadRef.current) {
@@ -47,14 +53,17 @@ const ImageUpload = ({ onFileChange }: Props) => {
     }
   }
 
-  const onError = () => {
-
+  const onError = (error: any) => {
+    console.log(error);
+    toast.error("Image upload failed");
   }
 
   const onSuccess = (response: any) => {
     setFile(response);
     onFileChange(response.filePath);
-  }
+    toast.success("Image uploaded successfully");
+  };
+
   return (
     <ImageKitProvider publicKey={publicKey}
                       urlEndpoint={urlEndpoint}
@@ -79,7 +88,7 @@ const ImageUpload = ({ onFileChange }: Props) => {
         <IKImage alt={file.filePath}
                  path={file.filePath}
                  width={500}
-                 height={500} />)
+                 height={300} />)
       }
     </ImageKitProvider>     
   )
