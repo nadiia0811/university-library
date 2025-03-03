@@ -14,6 +14,8 @@ interface Book {
     isLoanedBook?: boolean
 }
 
+
+
 interface User {
     id: string;
     fullName: string;
@@ -24,4 +26,13 @@ interface User {
     role: "USER" | "ADMIN" | null;
     lastActivityDate: string | null;
     createdAt: Date | null;
+}
+
+
+interface AuthCredentials {
+    fullName: string;
+    email: string;
+    password: string;
+    universityId: number;
+    universityCard: string;
 }
