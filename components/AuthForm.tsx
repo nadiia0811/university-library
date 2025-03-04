@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from 'react';
 import { useForm, 
@@ -7,11 +7,10 @@ import { useForm,
          DefaultValues, 
          SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z, ZodType } from "zod";
+import { ZodType } from "zod";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -23,6 +22,8 @@ import Link from 'next/link';
 import { Path } from 'react-hook-form';
 import { FIELD_NAMES, FIELD_TYPES } from '@/constants';
 import ImageUpload from './ImageUpload';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 
 interface Props<T extends FieldValues> {  
@@ -40,7 +41,8 @@ const AuthForm  = <T extends FieldValues> ({
     schema, 
     onSubmit, 
     defaultValues } : Props<T>) => {
-
+    
+    const router = useRouter();
     const isSignIn = type === "SIGN_IN";    
 
     const form: UseFormReturn<T> = useForm({
@@ -49,8 +51,14 @@ const AuthForm  = <T extends FieldValues> ({
       });
 
     const handleSubmit: SubmitHandler<T> = async (data) => {
-       console.log("hello")
-    }  
+       const result = await onSubmit(data);
+       if (!result.success) {
+        toast.error(`Failed to ${isSignIn ? "sign in" : "sign up"}`);
+       } else {
+        toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}`);
+        router.push("/");
+       }
+    };  
 
   return (
     <div className="flex flex-col gap-4">
@@ -64,7 +72,7 @@ const AuthForm  = <T extends FieldValues> ({
       </p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} 
-              className="space-y-6 w-full">
+              className="w-full space-y-6">
           
           {Object.keys(defaultValues).map((field) => (  //field is a string here
             <FormField  control={form.control}
@@ -96,7 +104,7 @@ const AuthForm  = <T extends FieldValues> ({
                   className="form-btn">{isSignIn ? "Sign In" : "Sign Up"}</Button>
         </form>
       </Form>
-      <p className="justify-center text-base font-medium flex gap-2">
+      <p className="flex justify-center gap-2 text-base font-medium">
         {isSignIn ? "New to BookWise?" : "Already have an account?"}
 
         <Link href={isSignIn ? "/sign-up" : "/sign-in"}

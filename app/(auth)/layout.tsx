@@ -12,7 +12,7 @@ const Layout = ({ children } : Props) => {
         <div className="auth-box">
           <div className="flex flex-row gap-3">
             <Image src="/icons/logo.svg" alt="logo" width={37} height={37} />
-            <h1 className="text-white font-semibold text-2xl">BookWise</h1>
+            <h1 className="text-white text-2xl font-semibold">BookWise</h1>
           </div> 
 
           <div>{children}</div>       
