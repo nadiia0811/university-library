@@ -7,6 +7,7 @@ import { ImageKitProvider,
 import React, { useRef, useState } from 'react';
 import Image from "next/image";
 import { toast } from "sonner";
+import { UploadError } from "imagekitio-next/dist/types/components/IKUpload/props";
 
 
 
@@ -23,7 +24,6 @@ const authenticator = async () => {
       }
 
       const data = await response.json();
-      console.log("data: ", data)
 
       const { signature, expire, token } = data;
       return { signature, expire, token };
@@ -51,14 +51,14 @@ const ImageUpload = ({ onFileChange }: Props) => {
       //@ts-ignore
       ikUploadRef.current?.click();
     }
-  }
+  };
 
-  const onError = (error: any) => {
+  const onError = (error: UploadError) => {
     console.log(error);
     toast.error("Image upload failed");
-  }
+  };
 
-  const onSuccess = (response: any) => {
+  const onSuccess = (response: { filePath: string}) => {
     setFile(response);
     onFileChange(response.filePath);
     toast.success("Image uploaded successfully");
