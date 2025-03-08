@@ -32,8 +32,8 @@ const Header = ({ session } : { session: Session }) => {
         <li>
           <Link href="/my-profile">
             <Avatar>
-              <AvatarFallback className="bg-white text-dark-300 font-semibold">
-                {getInitials(session?.user?.name! || "IN")}
+              <AvatarFallback className="font-semibold text-dark-300 bg-white">
+                {getInitials(session?.user?.name ?? "IN")}
               </AvatarFallback>
             </Avatar>
           </Link>

@@ -7,7 +7,7 @@ const Page = () => {
         Whoa, Slow Down There!
       </h1>
       <p className="mt-3 max-w-xl text-center text-light-400">
-        You're sending too many requests in a short period of time. Please slow
+        You are sending too many requests in a short period of time. Please slow
         down and try again later. Thank you for your patience!
       </p>
     </main>

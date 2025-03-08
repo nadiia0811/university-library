@@ -3,12 +3,12 @@
 import config from "@/lib/config";
 import { ImageKitProvider, 
          IKUpload, 
-         IKImage} from "imagekitio-next";
+         IKImage } from "imagekitio-next";
 import React, { useRef, useState } from 'react';
 import Image from "next/image";
 import { toast } from "sonner";
 import { UploadError } from "imagekitio-next/dist/types/components/IKUpload/props";
-
+import Error from "next/error";
 
 
 
@@ -28,8 +28,8 @@ const authenticator = async () => {
       const { signature, expire, token } = data;
       return { signature, expire, token };
       
-    } catch (error: any) {
-       throw new Error(`Authentication request failed: ${error.message}`)
+    } catch (error: unknown) {
+       throw new Error(`Authentication request failed: ${error.message}`);
     }
 };
 
@@ -48,7 +48,7 @@ const ImageUpload = ({ onFileChange }: Props) => {
     e.preventDefault();
 
     if (ikUploadRef.current) {
-      //@ts-ignore
+      //@ts-expect-error: Clicking on the ref even though TypeScript can't guarantee it's a valid function
       ikUploadRef.current?.click();
     }
   };
