@@ -38,4 +38,3 @@ async function sendEmail(message: string, email: string) {
 type UserState = "non-active" | "active";
 
 const getUserState = async () : Promise<UserState> => "non-active";
-  

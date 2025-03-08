@@ -13,7 +13,7 @@ const imagekit = new ImageKit({
     privateKey,
 });
 
-//console.log("imagekit:", imagekit) 
+
 
 export async function GET() { 
    return NextResponse.json(imagekit.getAuthenticationParameters());
@@ -25,9 +25,6 @@ export async function GET() {
     "expire": 1700000000, 
     "signature": "hashed-signature"
 }*/
-
-
-
 
 
 
