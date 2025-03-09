@@ -1,35 +1,3 @@
-/* import ImageKit from "imagekit";
-import config from "@/lib/config";
-import { NextResponse } from "next/server";  */
-
-
-//Next.js backend 
-
-/* const { publicKey, urlEndpoint, privateKey } = config.env.imagekit;
-
-const imagekit = new ImageKit({
-    publicKey,
-    urlEndpoint,
-    privateKey,
-});
-
-
-
-export async function GET(res: NextResponse) { 
-    console.log(imagekit.getAuthenticationParameters())
-   return NextResponse.json(imagekit.getAuthenticationParameters());
-}   */
- 
-/*answer is object
-{
-    "token": "random-token-string",
-    "expire": 1700000000, 
-    "signature": "hashed-signature"
-}*/
-
-
-
-
 import { NextResponse } from "next/server";
 import ImageKit from "imagekit";
 import config from "@/lib/config";
@@ -42,7 +10,7 @@ const imagekit = new ImageKit({
   urlEndpoint,
 });
 
-// Обрабатываем GET-запрос
+
 export async function GET() {
   try {
     const authenticationParams = imagekit.getAuthenticationParameters();
@@ -60,9 +28,9 @@ export async function GET() {
       { status: 500 }
     );
   }
-}
+};
 
-// Обрабатываем preflight-запросы
+// preflight-requests
 export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
@@ -72,13 +40,4 @@ export async function OPTIONS() {
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });
-}
-
-
-
-
-
-
-
-
-
+};
