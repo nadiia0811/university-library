@@ -5,31 +5,30 @@ import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
-
-
-
-const ibmPlexSans = localFont({  //defining custom font
+const ibmPlexSans = localFont({
+  //defining custom font
   src: [
-    {path: "/fonts/IBMPlexSans-Regular.ttf", weight: "400", style: "normal"},
-    {path: "/fonts/IBMPlexSans-Medium.ttf", weight: "500", style: "normal"},
-    {path: "/fonts/IBMPlexSans-SemiBold.ttf", weight: "600", style: "normal"},
-    {path: "/fonts/IBMPlexSans-Bold.ttf", weight: "700", style: "normal"},
-  ]
+    { path: "/fonts/IBMPlexSans-Regular.ttf", weight: "400", style: "normal" },
+    { path: "/fonts/IBMPlexSans-Medium.ttf", weight: "500", style: "normal" },
+    { path: "/fonts/IBMPlexSans-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "/fonts/IBMPlexSans-Bold.ttf", weight: "700", style: "normal" },
+  ],
 });
 
 const bebasNeue = localFont({
   src: [
-    {path: "/fonts/BebasNeue-Regular.ttf", weight: "400", style: "normal"}
+    { path: "/fonts/BebasNeue-Regular.ttf", weight: "400", style: "normal" },
   ],
-  variable: "--bebas-neue"
+  variable: "--bebas-neue",
 });
 
 export const metadata: Metadata = {
   title: "BookWise",
-  description: "BookWise is a book borrowing university library management solution",
+  description:
+    "BookWise is a book borrowing university library management solution",
 };
 
-const RootLayout = async ({ children }:{ children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
   return (
     <html lang="en">
@@ -43,6 +42,6 @@ const RootLayout = async ({ children }:{ children: React.ReactNode }) => {
       </SessionProvider>
     </html>
   );
-}
+};
 
 export default RootLayout;

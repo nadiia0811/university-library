@@ -10,7 +10,6 @@ const imagekit = new ImageKit({
   urlEndpoint,
 });
 
-
 export async function GET() {
   try {
     const authenticationParams = imagekit.getAuthenticationParameters();
@@ -24,11 +23,11 @@ export async function GET() {
   } catch (error) {
     console.error("Error while generating authentication parameters:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { success: false, error: "Internal Server Error" },
       { status: 500 }
     );
   }
-};
+}
 
 // preflight-requests
 export async function OPTIONS() {
@@ -40,4 +39,4 @@ export async function OPTIONS() {
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });
-};
+}

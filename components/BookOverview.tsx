@@ -1,19 +1,20 @@
-import React from 'react';
-import Image from 'next/image';
-import { Button } from './ui/button';
-import BookCover from './BookCover';
+import React from "react";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import BookCover from "./BookCover";
 
-
-
-const BookOverview = ({ title, 
-                        author, 
-                        genre, 
-                        rating, 
-                        totalCopies, 
-                        availableCopies, 
-                        description,
-                        coverColor,
-                        coverUrl }: Book) => {  //coverUrl = https://m.media-amazon.com/images/I/81J6APjwxlL.jpg
+const BookOverview = ({
+  title,
+  author,
+  genre,
+  rating,
+  totalCopies,
+  availableCopies,
+  description,
+  coverColor,
+  coverUrl,
+}: Book) => {
+  //coverUrl = https://m.media-amazon.com/images/I/81J6APjwxlL.jpg
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
@@ -24,7 +25,7 @@ const BookOverview = ({ title,
             By <span className="font-semibold text-light-200">{author}</span>
           </p>
           <p>
-            Category{" "} 
+            Category{" "}
             <span className="font-semibold text-light-200">{genre}</span>
           </p>
 
@@ -43,32 +44,34 @@ const BookOverview = ({ title,
           </p>
         </div>
 
-        <p className="book-description">
-          {description}
-        </p>
+        <p className="book-description">{description}</p>
         <Button className="book-overview_btn">
-          <Image src="/icons/book.svg" alt="book" width={20} height={20}/>
-          <p className="mt-[4px] text-xl font-bebas-neue text-dark-100">Borrow Book</p>
+          <Image src="/icons/book.svg" alt="book" width={20} height={20} />
+          <p className="mt-[4px] text-xl font-bebas-neue text-dark-100">
+            Borrow Book
+          </p>
         </Button>
       </div>
 
       <div className="relative flex flex-1 justify-center">
         <div className="relative">
-          <BookCover variant="wide"
-                     className="z-10"
-                     coverColor={coverColor}
-                     coverUrl={coverUrl} 
+          <BookCover
+            variant="wide"
+            className="z-10"
+            coverColor={coverColor}
+            coverUrl={coverUrl}
           />
           <div className="absolute left-16 top-10 rotate-12 opacity-40 max-sm:hidden">
-            <BookCover variant="wide"
-                       coverColor={coverColor}
-                       coverUrl={coverUrl} 
+            <BookCover
+              variant="wide"
+              coverColor={coverColor}
+              coverUrl={coverUrl}
             />
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default BookOverview;

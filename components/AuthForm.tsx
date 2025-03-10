@@ -1,64 +1,67 @@
 "use client";
 
-import React from 'react';
-import { useForm, 
-         FieldValues, 
-         UseFormReturn, 
-         DefaultValues, 
-         SubmitHandler } from 'react-hook-form';
-import { zodResolver } from "@hookform/resolvers/zod"
+import React from "react";
+import {
+  useForm,
+  FieldValues,
+  UseFormReturn,
+  DefaultValues,
+  SubmitHandler,
+} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodType } from "zod";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-  } from "@/components/ui/form";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from './ui/button';
-import Link from 'next/link';
-import { Path } from 'react-hook-form';
-import { FIELD_NAMES, FIELD_TYPES } from '@/constants';
-import ImageUpload from './ImageUpload';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { Path } from "react-hook-form";
+import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
+import ImageUpload from "./ImageUpload";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-
-interface Props<T extends FieldValues> {  
-// T is a type for SignUp form(object with props: fullName, email, universityId, universityCard, password)
-// and SignIn form(email, password)
+interface Props<T extends FieldValues> {
+  // T is a type for SignUp form(object with props: fullName, email, universityId, universityCard, password)
+  // and SignIn form(email, password)
 
   type: "SIGN_IN" | "SIGN_UP";
   schema: ZodType<T>;
   defaultValues: T;
-  onSubmit: (data: T) => Promise<{success: boolean, error?: string}>;
-} 
+  onSubmit: (data: T) => Promise<{ success: boolean; error?: string }>;
+}
 
-const AuthForm  = <T extends FieldValues> ({ 
-    type, 
-    schema, 
-    onSubmit, 
-    defaultValues } : Props<T>) => {
-    
-    const router = useRouter();
-    const isSignIn = type === "SIGN_IN";    
+const AuthForm = <T extends FieldValues>({
+  type,
+  schema,
+  onSubmit,
+  defaultValues,
+}: Props<T>) => {
+  const router = useRouter();
+  const isSignIn = type === "SIGN_IN";
 
-    const form: UseFormReturn<T> = useForm({
-        resolver: zodResolver(schema),
-        defaultValues: defaultValues as DefaultValues<T>
-      });
+  const form: UseFormReturn<T> = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: defaultValues as DefaultValues<T>,
+  });
 
-    const handleSubmit: SubmitHandler<T> = async (data) => {
-       const result = await onSubmit(data);
-       if (!result.success) {
-        toast.error(`Failed to ${isSignIn ? "sign in" : "sign up"}`);
-       } else {
-        toast.success(`You have successfully ${isSignIn ? "signed in" : "signed up"}`);
-        router.push("/");
-       }
-    };  
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data);
+    if (!result.success) {
+      toast.error(`Failed to ${isSignIn ? "sign in" : "sign up"}`);
+    } else {
+      toast.success(
+        `You have successfully ${isSignIn ? "signed in" : "signed up"}`
+      );
+      router.push("/");
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -67,54 +70,68 @@ const AuthForm  = <T extends FieldValues> ({
       </h1>
 
       <p className="text-light-100">
-        {isSignIn ? "Access the vast collection of resources, and stay updated" : 
-                    "Please complete all fields and upload a valid university ID to gain access to the library"}
+        {isSignIn
+          ? "Access the vast collection of resources, and stay updated"
+          : "Please complete all fields and upload a valid university ID to gain access to the library"}
       </p>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} 
-              className="w-full space-y-6">
-          
-          {Object.keys(defaultValues).map((field) => (  //field is a string here
-            <FormField  control={form.control}
-                        name={field as Path<T>}   //field is a string
-                        key={field}
-                        render={({ field }) => (  //field is object
-                        <FormItem>
-                            <FormLabel className="capitalize">
-                              {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}
-                            </FormLabel>
-                            <FormControl>
-                              {field.name === "universityCard" ? <ImageUpload onFileChange={field.onChange}/> : 
-                                <Input required 
-                                       type={
-                                          FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]
-                                       }                                       
-                                       {...field} 
-                                       className="form-input" 
-                                />
-                              }                             
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                        )}
-            />
-          ))}
-         
-          <Button type="submit"
-                  className="form-btn">{isSignIn ? "Sign In" : "Sign Up"}</Button>
+        <form
+          onSubmit={form.handleSubmit(handleSubmit)}
+          className="w-full space-y-6"
+        >
+          {Object.keys(defaultValues).map(
+            (
+              field //field is a string here
+            ) => (
+              <FormField
+                control={form.control}
+                name={field as Path<T>} //field is a string
+                key={field}
+                render={(
+                  { field } //field is object
+                ) => (
+                  <FormItem>
+                    <FormLabel className="capitalize">
+                      {FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}
+                    </FormLabel>
+                    <FormControl>
+                      {field.name === "universityCard" ? (
+                        <ImageUpload onFileChange={field.onChange} />
+                      ) : (
+                        <Input
+                          required
+                          type={
+                            FIELD_TYPES[field.name as keyof typeof FIELD_TYPES]
+                          }
+                          {...field}
+                          className="form-input"
+                        />
+                      )}
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )
+          )}
+
+          <Button type="submit" className="form-btn">
+            {isSignIn ? "Sign In" : "Sign Up"}
+          </Button>
         </form>
       </Form>
       <p className="flex justify-center gap-2 text-base font-medium">
         {isSignIn ? "New to BookWise?" : "Already have an account?"}
 
-        <Link href={isSignIn ? "/sign-up" : "/sign-in"}
-            className="font-bold text-primary">
-        {isSignIn ? "Create an Account" : "Sign In"}
-      </Link>
+        <Link
+          href={isSignIn ? "/sign-up" : "/sign-in"}
+          className="font-bold text-primary"
+        >
+          {isSignIn ? "Create an Account" : "Sign In"}
+        </Link>
       </p>
     </div>
-    
-  )
-}
+  );
+};
 
 export default AuthForm;
