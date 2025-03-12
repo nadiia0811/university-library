@@ -68,6 +68,71 @@ const BookForm = ({ type, ...book }: Props) => {
                 </FormItem>
             )}
         />
+
+        <FormField
+            control={form.control}
+            name={"author"}
+            render={({ field }) => (
+                <FormItem className="flex flex-col gap-1">
+                    <FormLabel className="text-base font-normal text-dark-500">
+                      Author
+                    </FormLabel>
+                    <FormControl>
+                        <Input
+                            required 
+                            placeholder="Book author"
+                            {...field}
+                            className="book-form_input"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
+
+        <FormField
+            control={form.control}
+            name={"genre"}
+            render={({ field }) => (
+                <FormItem className="flex flex-col gap-1">
+                    <FormLabel className="text-base font-normal text-dark-500">
+                      Genre
+                    </FormLabel>
+                    <FormControl>
+                        <Input
+                            required 
+                            placeholder="Book genre"
+                            {...field}
+                            className="book-form_input"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
+
+        <FormField
+            control={form.control}
+            name={"rating"}
+            render={({ field }) => (
+                <FormItem className="flex flex-col gap-1">
+                    <FormLabel className="text-base font-normal text-dark-500">
+                      Rating
+                    </FormLabel>
+                    <FormControl>
+                        <Input
+                            type="number" 
+                            min={1}
+                            max={5}
+                            placeholder="Book rating"
+                            {...field}
+                            className="book-form_input"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+            )}
+        />
       </form>
     </Form>
   );
