@@ -40,6 +40,7 @@ interface Props {
   placeholder: string;
   folder: string;
   variant: "dark" | "light";
+  value?: string;
 }
 
 const FileUpload = ({
