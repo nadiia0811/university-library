@@ -43,6 +43,6 @@ interface BookParams {
   description: string;
   coverColor: string;
   coverUrl: string;
-  videoUrl?: string;
+  videoUrl: string;
   summary: string;
 }
