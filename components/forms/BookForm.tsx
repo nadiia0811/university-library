@@ -19,6 +19,9 @@ import { bookFormSchema } from "@/lib/validations";
 import { z } from "zod";
 import { Button } from "../ui/button";
 import ColorPicker from "../admin/ColorPicker";
+import { createBook } from "@/lib/admin/actions/book";
+import { toast } from "sonner";
+
 
 interface Props extends Partial<Book> {
   type?: "create" | "update";
@@ -43,7 +46,17 @@ const BookForm = ({ type, ...book }: Props) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof bookFormSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof bookFormSchema>) => {
+    const response = await createBook(values);
+    console.log(response);
+
+    if (response.success) {
+      toast.success("Book created successfully");
+      router.push(`/admin/books/${response.data.id}`);
+    } else {
+      toast.error(`${response.message}`);
+    }
+  };
 
   return (
     <Form {...form}>

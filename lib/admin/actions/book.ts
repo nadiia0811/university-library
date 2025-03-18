@@ -22,6 +22,6 @@ export const createBook = async (params: BookParams) => {
       return {
         success: false,
         message: "An error occured while creating the book"
-    }
+      }
   }
 };
