@@ -22,6 +22,6 @@ export const bookFormSchema = z.object({
   totalCopies: z.coerce.number().int().positive().lte(10000),
   coverUrl: z.string().nonempty(),
   coverColor: z.string().trim().regex(/^#[0-9A-F]{6}$/i),
-  videoUrl: z.string().nonempty(),
+  videoUrl: z.string(),
   summary: z.string().trim().min(10)
 });
