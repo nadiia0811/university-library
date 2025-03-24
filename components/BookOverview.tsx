@@ -14,7 +14,7 @@ const BookOverview = ({
   coverColor,
   coverUrl,
 }: Book) => {
-  //coverUrl = https://m.media-amazon.com/images/I/81J6APjwxlL.jpg
+  
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">

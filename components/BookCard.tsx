@@ -7,8 +7,7 @@ import { Button } from "./ui/button";
 
 const BookCard = ({
   id,
-  title,
-  author, 
+  title, 
   genre,
   coverColor,
   coverUrl,
