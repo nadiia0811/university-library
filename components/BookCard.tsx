@@ -8,11 +8,11 @@ import { Button } from "./ui/button";
 const BookCard = ({
   id,
   title,
-  /*  author, */
+  author, 
   genre,
   coverColor,
   coverUrl,
-  isLoanedBook = false,
+  isLoanedBook = false
 }: Book) => {
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
