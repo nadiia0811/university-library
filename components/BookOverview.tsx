@@ -12,7 +12,7 @@ const BookOverview = ({
   availableCopies,
   description,
   coverColor,
-  coverUrl,
+  coverUrl
 }: Book) => {
   
   return (
