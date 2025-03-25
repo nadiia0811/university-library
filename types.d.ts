@@ -10,9 +10,9 @@ interface Book {
   coverColor: string;
   coverUrl: string;
   createdAt: Date | null;
-  videoUrl?: string;
+  videoUrl?: string | null;
   summary?: string;
-  /* isLoanedBook?: boolean; */
+  isLoanedBook?: boolean; 
 }
 
 interface User {
