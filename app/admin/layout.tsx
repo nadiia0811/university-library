@@ -17,12 +17,13 @@ const Layout = async ({ children }: Props) => {
 
   //returns object with key = table name, value = "ADMIN" | "USER"
   //create alias with isAdmin key
-  const isAdmin = await db.select({isAdmin: users.role}) 
-                          .from(users)
-                          .where(eq(users.id, session.user.id))
-                          .limit(1)
-                          .then((res) => res[0]?.isAdmin === "ADMIN");
-  
+  const isAdmin = await db
+    .select({ isAdmin: users.role })
+    .from(users)
+    .where(eq(users.id, session?.user?.id))
+    .limit(1)
+    .then((res) => res[0]?.isAdmin === "ADMIN");
+
   if (!isAdmin) redirect("/");
 
   if (!session?.user?.id) {
@@ -33,7 +34,7 @@ const Layout = async ({ children }: Props) => {
       <Sidebar session={session} />
 
       <div className="admin-container">
-        <Header session={session}/>
+        <Header session={session} />
         {children}
       </div>
     </main>
