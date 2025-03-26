@@ -13,7 +13,7 @@ interface Book {
   videoUrl?: string | null;
   summary?: string;
   isLoanedBook?: boolean; 
-  userId?: string; 
+  /* userId?: string; */ 
 }
 
 interface User {
@@ -47,4 +47,9 @@ interface BookParams {
   coverUrl: string;
   videoUrl: string;
   summary: string;
+}
+
+interface BorrowBookParams {
+  bookId: string;
+  userId: string;
 }
