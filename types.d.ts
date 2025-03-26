@@ -13,6 +13,7 @@ interface Book {
   videoUrl?: string | null;
   summary?: string;
   isLoanedBook?: boolean; 
+  userId?: string; 
 }
 
 interface User {
