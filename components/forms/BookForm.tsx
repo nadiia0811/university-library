@@ -48,7 +48,6 @@ const BookForm = ({ type, ...book }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof bookFormSchema>) => {
     const response = await createBook(values);
-    console.log(response);
 
     if (response.success) {
       toast.success("Book created successfully");
