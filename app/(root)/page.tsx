@@ -15,9 +15,6 @@ const Home = async () => {
     .orderBy(desc(books.createdAt))) as Book[];
   
   const userId = session?.user?.id as string;
-  //const id = latestBooks[0].id as string;
-
-  console.log(latestBooks[0])
 
   return (
     <>
@@ -25,7 +22,7 @@ const Home = async () => {
 
       <BookList
         title="Latest Books"
-        books={latestBooks.slice(1)}
+        allBooks={latestBooks.slice(1)}
         containerClassName="mt-28"
       />
     </>
