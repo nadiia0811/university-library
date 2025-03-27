@@ -3,20 +3,19 @@ import BookCard from "./BookCard";
 
 interface Props {
   title: string;
-  books: Book[];
+  allBooks: Book[] | undefined;
   containerClassName?: string;
 }
 
-const BookList = ({ title, books, containerClassName }: Props) => {
-  if (books.length < 2) return;
+const BookList = ({ title, allBooks, containerClassName }: Props) => {
 
   return (
     <section className={containerClassName}>
       <h2 className="font-bebas-neue text-4xl text-light-100">{title}</h2>
 
       <ul className="book-list">
-        {books.map((book) => (
-          <BookCard key={book.title} {...book} />
+        {allBooks && allBooks.map((book) => (
+          <BookCard key={book.id ?? book.title} {...book} />
         ))}
       </ul>
     </section>
