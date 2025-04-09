@@ -272,15 +272,15 @@
 
   /* Library */
   .library {
-    @apply mx-auto flex max-w-xl w-full flex-col text-center;
+    @apply mx-auto flex max-w-7xl w-full flex-col gap-5;
   }
 
   .library-subtitle {
-    @apply text-lg font-semibold uppercase text-light-100;
+    @apply text-base font-semibold uppercase text-light-100 md:text-lg;
   }
 
   .library-title {
-    @apply mt-2 text-3xl font-semibold text-white xs:text-5xl;
+    @apply mt-2 text-2xl font-semibold text-white md:text-5xl;
   }
 }
 
@@ -349,4 +349,6 @@
   body {
     @apply bg-background text-foreground;
   }
+
+
 }
