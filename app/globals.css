@@ -282,6 +282,11 @@
   .library-title {
     @apply mt-2 text-2xl font-semibold text-white md:text-5xl;
   }
+
+  /* Users*/
+  .users-container {
+    @apply w-full;
+  }
 }
 
 @layer base {
@@ -340,8 +345,6 @@
   }
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -349,6 +352,4 @@
   body {
     @apply bg-background text-foreground;
   }
-
-
 }
