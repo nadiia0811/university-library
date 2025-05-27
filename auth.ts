@@ -5,13 +5,19 @@ import { users } from "./database/schema";
 import { eq } from "drizzle-orm";
 import { compare } from "bcryptjs";
 
+
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
   providers: [
     CredentialsProvider({
-      async authorize(credentials) {
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      }, 
+      async authorize(credentials: Partial<Record<"email" | "password", unknown>>) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
@@ -54,10 +60,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        (session.user as User).id = token.id as string;
         session.user.name = token.name as string;
       }
       return session;
     },
   },
-});
+}); 
+
+
+
+
+
