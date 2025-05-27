@@ -5,8 +5,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
+
 const ibmPlexSans = localFont({
-  //defining custom font
+  
   src: [
     { path: "/fonts/IBMPlexSans-Regular.ttf", weight: "400", style: "normal" },
     { path: "/fonts/IBMPlexSans-Medium.ttf", weight: "500", style: "normal" },

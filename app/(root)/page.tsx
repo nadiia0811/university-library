@@ -6,8 +6,10 @@ import { db } from "@/database/drizzle";
 import { books } from "@/database/schema";
 import { desc } from "drizzle-orm";
 
+
 const Home = async () => {
   const session = await auth();
+  
   const latestBooks = (await db
     .select()
     .from(books)
@@ -18,11 +20,11 @@ const Home = async () => {
 
   return (
     <>
-      <BookOverview {...latestBooks[0]} userId={userId} />
+      <BookOverview {...latestBooks[0] ?? sampleBooks[0]} userId={userId} />
 
       <BookList
         title="Latest Books"
-        allBooks={latestBooks.slice(1)}
+        allBooks={latestBooks.slice(1) ?? sampleBooks}
         containerClassName="mt-28"
       />
     </>

@@ -12,7 +12,6 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const userId=session?.user?.id as string;
   
 
-  //fetch data based on id
   const [bookDetails] = await db
     .select()
     .from(books)
